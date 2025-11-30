@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Làm người yêu anh nhé?</title>
+<style>
+    body {
+        background: pink;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+    }
+
+    h1 {
+        margin-top: 80px;
+        font-size: 40px;
+        color: #d6006a;
+    }
+
+    .btn-container {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        position: relative;
+    }
+
+    button {
+        width: 160px;
+        padding: 15px 0;
+        font-size: 20px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        position: relative;  /* giữ vị trí ban đầu */
+    }
+
+    #yes {
+        background-color: #ff4f9f;
+        color: white;
+    }
+
+    #no {
+        background-color: #999;
+        color: white;
+    }
+
+    #message {
+        margin-top: 50px;
+        font-size: 32px;
+        color: red;
+        font-weight: bold;
+        display: none;
+    }
+
+    /* Trái tim rơi */
+    .heart {
+        position: fixed;
+        top: -10px;
+        color: red;
+        font-size: 20px;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>Đồng ý làm người yêu anh nhé? ❤️</h1>
+
+<div class="btn-container" id="buttons">
+    <button id="yes">Đồng ý</button>
+    <button id="no">Không đồng ý</button>
+</div>
+
+<div id="message">Anh biết mà, em là của anh ❤️🥰</div>
+
+<script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const msg = document.getElementById("message");
+    const btnBox = document.getElementById("buttons");
+
+    // Nút Không đồng ý chạy trốn
+    noBtn.addEventListener("mouseover", () => {
+        noBtn.style.position = "absolute"; // Chỉ chuyển sang absolute khi chạy
+        const x = Math.random() * (window.innerWidth - 200);
+        const y = Math.random() * (window.innerHeight - 200);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    // Nhấn Đồng ý → hiện chữ, ẩn nút
+    yesBtn.addEventListener("click", () => {
+        btnBox.style.display = "none";
+        msg.style.display = "block";
+    });
+
+    // Trái tim rơi
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+    setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
